@@ -24,12 +24,14 @@ clean:
 	rm -f *.o $(LIBNAME) $(DEPENDFILE) *Test
 
 install: $(LIBNAME)
-	sudo cp reader.conf /etc/reader.conf.d/persoSim
-	sudo cp $(LIBNAME) /usr/lib/pcsc/drivers/serial/
+	mkdir -p $(PREFIX)/etc/reader.conf.d/
+	cp reader.conf $(PREFIX)/etc/reader.conf.d/persoSim
+	mkdir -p $(PREFIX)/usr/lib/pcsc/drivers/serial/
+	cp $(LIBNAME) $(PREFIX)/usr/lib/pcsc/drivers/serial/
 
 uninstall: 
-	sudo rm -f /etc/reader.conf.d/persoSim
-	sudo rm -f /usr/lib/pcsc/drivers/serial/$(LIBNAME)
+	rm -f $(PREFIX)/etc/reader.conf.d/persoSim
+	rm -f $(PREFIX)/usr/lib/pcsc/drivers/serial/$(LIBNAME)
 
 tests: hexStringTest
 
